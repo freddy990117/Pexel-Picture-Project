@@ -6,21 +6,30 @@ import axios from "axios";
 const Homepage = () => {
   const APIKey = "lL1HhRkMbVFuuRw16a0djqE25Rp09n4Mp1ySItXcFVyiSSZMZ5SpOviJ";
   const initialURL = "https://api.pexels.com/v1/curated?page=1&per_page=15";
+  let searchURL = `https://api.pexels.com/v1/search?query=${input}&page=1&per_page=15`;
+  // States
   const [data, setData] = useState(null);
-  const searchURL = async (url) => {
+  const [input, setInput] = useState("");
+
+  const search = async (url) => {
     const result = await axios.get(url, {
       headers: { Authorization: APIKey },
     });
     // Here is API's Data
     setData(result.data.photos);
   };
-
+  // Show Picture immediately
   useEffect(() => {
-    searchURL(initialURL);
+    search(initialURL);
   }, []);
   return (
     <div style={{ minHeight: "100vh" }}>
-      <Search searchURL={searchURL} />
+      <Search
+        search={() => {
+          search(searchURL);
+        }}
+        setInput={setInput}
+      />
       <div className="pictures">
         {/* logical operator */}
         {data &&

@@ -1,9 +1,14 @@
 import React from "react";
-const Search = ({ searchURL }) => {
+
+const Search = ({ search, setInput }) => {
+  const inputHandler = (e) => {
+    setInput(e.target.value);
+  };
+
   return (
     <div className="search">
-      <input type="text" />
-      <button onClick={searchURL}>Search</button>
+      <input className="input" type="text" onChange={inputHandler} />
+      <button onClick={search}>Search</button>
     </div>
   );
 };
