@@ -6,19 +6,23 @@ import axios from "axios";
 const Homepage = () => {
   // States
   const [data, setData] = useState(null);
+  // 輸入的 State
   const [input, setInput] = useState("");
-
+  // More Picture Button State
+  const [morePage, setMorePage] = useState(1);
+  // 設定『確定搜尋』的狀態
+  const [currentSearch, setCurrentSearch] = useState("");
   // My API Key
   const APIKey = "lL1HhRkMbVFuuRw16a0djqE25Rp09n4Mp1ySItXcFVyiSSZMZ5SpOviJ";
   // 設定初始的 URL
-  const initialURL = "https://api.pexels.com/v1/curated?page=1&per_page=15";
+  const initialURL = "https://api.pexels.com/v1/curated?page=1&per_page=3";
   // 設定搜尋的 URL
-  let searchURL = `https://api.pexels.com/v1/search?query=${input}&page=1&per_page=15`;
+  let searchURL = `https://api.pexels.com/v1/search?query=${input}&page=1&per_page=3`;
 
   // 設定非同步函式，並會接受一個 url 參數
   const search = async (url) => {
     // 透過 axios 取得資料
-    const result = await axios.get(url, {
+    let result = await axios.get(url, {
       headers: { Authorization: APIKey },
     });
     // Here is API's Data
@@ -28,9 +32,31 @@ const Homepage = () => {
   useEffect(() => {
     search(initialURL);
   }, [input]);
-  //
-  // More Picture Button，還沒做出來
-  const morePicture = () => {};
+
+  // More Picture Button
+  const morePicture = async () => {
+    // Set a new URL
+    let newURL;
+    if (input === "") {
+      newURL = `https://api.pexels.com/v1/curated?page=${[
+        morePage + 1,
+      ]}&per_page=3`;
+    } else {
+      newURL = `https://api.pexels.com/v1/search?query=${input}&page=${
+        morePage + 1
+      }&per_page=3`;
+    }
+    // 點選 More Picture 後跳出更多圖片
+    setMorePage(morePage + 1);
+
+    // 將原本的 URL 替換成搜尋的 newURL
+    let result = await axios.get(newURL, {
+      headers: { Authorization: APIKey },
+    });
+    // 使用 concat 來合併 array
+    setData(data.concat(result.data.photos));
+  };
+
   return (
     <div style={{ minHeight: "100vh" }}>
       <Search
@@ -47,9 +73,10 @@ const Homepage = () => {
             return <Picture data={d} index={index} />;
           })}
       </div>
-      {/* <div className="morePicture">
-        <button onClick={morePicture()}>More</button>
-      </div> */}
+      {/* 建立更多圖片的按鈕 */}
+      <div className="morePicture">
+        <button onClick={morePicture}>More Picture</button>
+      </div>
     </div>
   );
 };
