@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useLayoutEffect, useMemo } from "react";
 import Search from "../components/Search";
 import Picture from "../components/Picture";
 import axios from "axios";
 
 const Homepage = () => {
   // States
-  const [data, setData] = useState(null);
+  const [data, setData] = useState([]);
   // 輸入的 State
   const [input, setInput] = useState("");
   // More Picture Button State
@@ -17,7 +17,11 @@ const Homepage = () => {
   // 設定初始的 URL
   const initialURL = "https://api.pexels.com/v1/curated?page=1&per_page=3";
   // 設定搜尋的 URL
-  let searchURL = `https://api.pexels.com/v1/search?query=${input}&page=1&per_page=3`;
+  // let searchURL = `https://api.pexels.com/v1/search?query=${input}&page=1&per_page=3`;
+  // 當 input 變更時執行，使用 useMemo 來提升效能
+  const searchURL = useMemo(() => {
+    return `https://api.pexels.com/v1/search?query=${input}&page=1&per_page=3`;
+  }, [input]);
 
   // 設定非同步函式，並會接受一個 url 參數
   const search = async (url) => {
@@ -31,10 +35,11 @@ const Homepage = () => {
     setCurrentSearch(input);
   };
 
-  // Show Picture immediately （目前的 url 參數是 initialURL）
+  // Show Picture immediately
   useEffect(() => {
-    search(initialURL);
-  }, [input]);
+    // 因為不需要更新 DOM，所以使用 useEffect
+    search(initialURL); //（目前的 url 參數是 initialURL）
+  }, []); // 未設定 dependencies，只在一開始執行
 
   // More Picture Button
   const morePicture = async () => {
