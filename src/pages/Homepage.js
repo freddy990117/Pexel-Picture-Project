@@ -10,7 +10,7 @@ const Homepage = () => {
   const [input, setInput] = useState("");
   // More Picture Button State
   const [morePage, setMorePage] = useState(1);
-  // 設定『確定搜尋』的狀態
+  // 設定「確定搜尋」的狀態
   const [currentSearch, setCurrentSearch] = useState("");
   // My API Key
   const APIKey = "lL1HhRkMbVFuuRw16a0djqE25Rp09n4Mp1ySItXcFVyiSSZMZ5SpOviJ";
@@ -23,11 +23,14 @@ const Homepage = () => {
   const search = async (url) => {
     // 透過 axios 取得資料
     let result = await axios.get(url, {
+      // 驗證身份
       headers: { Authorization: APIKey },
     });
     // Here is API's Data
     setData(result.data.photos);
+    setCurrentSearch(input);
   };
+
   // Show Picture immediately （目前的 url 參數是 initialURL）
   useEffect(() => {
     search(initialURL);
@@ -37,17 +40,17 @@ const Homepage = () => {
   const morePicture = async () => {
     // Set a new URL
     let newURL;
-    if (input === "") {
-      newURL = `https://api.pexels.com/v1/curated?page=${[
-        morePage + 1,
-      ]}&per_page=3`;
+    // 點選 More Picture 後跳出更多圖片
+    setMorePage(morePage + 1);
+    if (currentSearch === "") {
+      newURL = `https://api.pexels.com/v1/curated?page=${
+        morePage + 1
+      }&per_page=3`;
     } else {
-      newURL = `https://api.pexels.com/v1/search?query=${input}&page=${
+      newURL = `https://api.pexels.com/v1/search?query=${currentSearch}&page=${
         morePage + 1
       }&per_page=3`;
     }
-    // 點選 More Picture 後跳出更多圖片
-    setMorePage(morePage + 1);
 
     // 將原本的 URL 替換成搜尋的 newURL
     let result = await axios.get(newURL, {
@@ -70,7 +73,7 @@ const Homepage = () => {
         {/* logical operator */}
         {data &&
           data.map((d, index) => {
-            return <Picture data={d} index={index} />;
+            return <Picture data={d} index={index} key={d.id} />;
           })}
       </div>
       {/* 建立更多圖片的按鈕 */}
