@@ -13,7 +13,7 @@ const Homepage = () => {
   // 設定「確定搜尋」的狀態
   const [currentSearch, setCurrentSearch] = useState("");
   // My API Key
-  const APIKey = "lL1HhRkMbVFuuRw16a0djqE25Rp09n4Mp1ySItXcFVyiSSZMZ5SpOviJ";
+  const APIKey = "My Secrect";
   // 設定初始的 URL
   const initialURL = "https://api.pexels.com/v1/curated?page=1&per_page=3";
   // 設定搜尋的 URL
