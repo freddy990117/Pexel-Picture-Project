@@ -4,7 +4,7 @@
 
 ## 🔍 Demo
 
-![Demo](https://i.imgur.com/MWem72W.gif)
+![Image](https://github.com/user-attachments/assets/c36b3301-488c-4314-b74a-95bfb8fa6b61)
 
 ## 🚀 功能特色
 
