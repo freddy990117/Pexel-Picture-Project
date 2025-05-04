@@ -1,70 +1,92 @@
-# Getting Started with Create React App
+# 📸 Pexel Picture Search
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+這是一款使用 React 開發的圖片搜尋應用程式，透過 Pexels API 即時取得高品質的免費圖片，並提供簡潔的搜尋與瀏覽介面。
 
-## Available Scripts
+## 🔍 Demo
 
-In the project directory, you can run:
+gif.......
 
-### `npm start`
+## 🚀 功能特色
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+* 使用 `axios` 串接 Pexels API 並解析圖片資料。
+* 提供即時搜尋功能，使用者可輸入關鍵字搜尋相關圖片。
+* 採用 React Router 架構，實現首頁與結果頁的頁面切換。
+* 使用 React Hooks 管理狀態與效能，提升用戶體驗與開發效率。
+* 響應式設計，適應各種裝置尺寸，提供良好的使用體驗。
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## 🛠️ 技術與技能
 
-### `npm test`
+本專案以 React 為核心，搭配多種 Hooks 與前端實務技術，實作圖片搜尋平台：
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+* **React Router（BrowserRouter）**：實作多頁式應用，包含首頁與搜尋結果頁，讓使用者能夠透過路由切換頁面。
+* **Hooks 使用**
 
-### `npm run build`
+  * `useState`：管理搜尋欄位與 API 回傳的圖片資料。
+  * `useEffect`：控制元件初始載入與依賴變化時的資料請求。
+  * `useLayoutEffect`：確保畫面更新前即完成必要資料渲染，避免閃爍。
+  * `useMemo`：優化重複渲染效能，例如緩存圖片列表。
+* **Props 傳遞**：元件間透過 props 傳遞搜尋資料與事件處理，保持組件解耦。
+* **Axios**：透過 axios 向 Pexels API 發送圖片請求並處理非同步資料。
+* **模組化設計**：頁面與元件分離，提升可維護性與擴充性。
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## 📂 專案結構
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+本專案採用 BrowserRouter 為核心路由系統，實現多頁切換與資料共用架構：
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+```
+Pexel-Picture-Project/
+├── public/
+│   └── index.html
+├── src/
+│   ├── components/
+│   │   ├── SearchBar.js        
+│   │   ├── Picture.js          
+│   │   └── Footer.js           
+│   ├── pages/
+│   │   ├── Homepage.jsx       
+│   ├── App.jsx                  # 路由配置（BrowserRouter）
+│   ├── index.js
+│   └── App.css
+├── .gitignore
+├── package.json
+└── README.md
+```
 
-### `npm run eject`
+## ⚙️ 安裝與使用
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+1. **下載或複製此專案：**
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+   ```bash
+   git clone https://github.com/freddy990117/Pexel-Picture-Project.git
+   ```
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+2. **安裝相依套件：**
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+   ```bash
+   cd Pexel-Picture-Project
+   npm install
+   ```
 
-## Learn More
+3. **取得 Pexels API 金鑰：**
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+   前往 [Pexels 官方網站](https://www.pexels.com/api/) 註冊並取得 API 金鑰。
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+4. **設定 API 金鑰：**
 
-### Code Splitting
+   在 `src/api/index.js` 或 `Homepage.jsx` 中，將 `YOUR_API_KEY` 替換為你的實際 API 金鑰。
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+5. **啟動應用程式：**
 
-### Analyzing the Bundle Size
+   ```bash
+   npm start
+   ```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+   使用瀏覽器開啟 `http://localhost:3000`，即可開始使用圖片搜尋功能。
 
-### Making a Progressive Web App
+## 🙏 特別感謝
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+本專案靈感與技術實作參考了 [Udemy Teacher](Wilson Ren)，感謝他詳細的講解與範例，讓我順利完成這個圖片搜尋應用程式 🙏
 
-### Advanced Configuration
+## 📄 授權
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+本專案採用 MIT 授權條款，詳情請參閱 [LICENSE](LICENSE) 檔案。
