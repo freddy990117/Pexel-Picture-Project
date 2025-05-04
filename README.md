@@ -4,7 +4,7 @@
 
 ## 🔍 Demo
 
-gif.......
+![Demo](https://i.imgur.com/MWem72W.gif)
 
 ## 🚀 功能特色
 
